@@ -1,5 +1,7 @@
 # Launchpad — React launch planner
 
+[![Deploy to Simplifyd Cloud](https://simplifyd.com/deploy-button.svg)](https://console.cloud.simplifyd.com/deploy?repo=https%3A%2F%2Fgithub.com%2FSimplifydCloud%2Fsample-react-launchpad)
+
 [![CI](https://github.com/SimplifydCloud/sample-react-launchpad/actions/workflows/ci.yml/badge.svg)](https://github.com/SimplifydCloud/sample-react-launchpad/actions/workflows/ci.yml)
 
 A small mission control for your next big idea. A responsive React + Vite app with a working three-stage task board, team filters, search, live launch progress, JSON export, and browser persistence. No account, backend, or API key required.
@@ -20,6 +22,14 @@ npm run dev
 Requires **Node 22.12+**. Open the URL printed by Vite. Create a task, move it to Shipped, reload, and watch your progress stick. **Reset demo** restores the starting board. Browser storage is local to the current origin; sharing a URL does not share a board.
 
 ## Deploy on Simplifyd Cloud
+
+### Deploy with the button
+
+Click **Deploy to Simplifyd Cloud** above, sign in, and choose a workspace and project. Review the web service (1 vCPU, 256 MB), confirm, then deploy it from the canvas. The button creates a container service using the public, prebuilt `ghcr.io/simplifydcloud/sample-react-launchpad:1.0.0` image and the settings in `simplifyd.json`. Normal compute usage charges apply.
+
+For a static-site deployment, or to build your own source changes, follow the GitHub flow below.
+
+### Deploy as a static site
 
 1. Create a repository from this template in your GitHub account.
 2. In your Simplifyd project, choose **Add → Static Site** and apply the change.
@@ -63,3 +73,7 @@ Browser tests cover creating, moving, persisting, searching, and deleting tasks,
 React handles the UI; Vite produces static files; Nginx is only used for the optional container. `vite preview` is a local verification server.
 
 [More Simplifyd samples](https://github.com/SimplifydCloud/sample-projects) · [Vite deployment documentation](https://vite.dev/guide/static-deploy) · MIT licensed.
+
+## Maintaining the deploy image
+
+The **Publish deploy image** GitHub Actions workflow publishes a Linux AMD64 image on a `v*` tag or a manual run with a version. For a new release, run the app checks, publish the new version, then update the image tag in `simplifyd.json`. A newly created GHCR package must be made public in its package settings before the button can pull it anonymously. Forks can publish images to their own namespace and update the manifest accordingly.

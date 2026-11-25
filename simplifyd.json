@@ -1,0 +1,31 @@
+{
+  "name": "Launchpad",
+  "description": "React launch planner \u2014 a working Simplifyd Cloud sample.",
+  "services": [
+    {
+      "key": "web",
+      "name": "Launchpad",
+      "type": "docker",
+      "vcpus": 1,
+      "memory": 256,
+      "docker": {
+        "image": "ghcr.io/simplifydcloud/sample-react-launchpad",
+        "tag": "1.0.0"
+      },
+      "ingress": [
+        {
+          "port": 8080,
+          "protocol": "HTTP"
+        }
+      ],
+      "readiness_probe": {
+        "path": "/",
+        "port": 8080,
+        "period_seconds": 5,
+        "timeout_seconds": 3,
+        "failure_threshold": 6,
+        "success_threshold": 1
+      }
+    }
+  ]
+}
